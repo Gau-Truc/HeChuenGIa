@@ -21,6 +21,8 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            dataGridView2.DefaultCellStyle.SelectionBackColor = Color.White;
+            dataGridView2.DefaultCellStyle.SelectionForeColor = Color.Black;
             string sql1 = "update Trieu_chung set Checkbox='false'";
             connect.ExecuteNonData(sql1);
             string sql = "select * from Trieu_chung";
@@ -60,7 +62,27 @@ namespace WindowsFormsApp1
                 string rowValue = row["Cac_Trieu_Chung"].ToString();
                 string[] mang_luat = rowValue.Split(',');
                 Array.Sort(mang_luat);
-                if
+                int KiemTra = KiemTraTonTai(mang_luat, mang);
+                if (KiemTra == 1)
+                {
+                    string Ket_Luan = row["Ket_Luan"].ToString();
+                    string rowValue_TenKetLuan = Select_data(Ket_Luan);
+                    textBox1.Text = rowValue_TenKetLuan;
+                    break;
+                }
+                else if (KiemTra == 2)
+                {
+                    string Ket_Luan = row["Ket_Luan"].ToString();
+                    string rowValue_TenKetLuan = Select_data(Ket_Luan);
+                    textBox1.Text = "Nghi ngờ bị " + rowValue_TenKetLuan;
+                    break;
+                }
+                else
+                {
+                 
+                    textBox1.Text = "false";
+                }
+               
                 //mang_luat[i] = rowValue;
                 //MessageBox.Show(mang_luat[i]);
             }
@@ -91,12 +113,19 @@ namespace WindowsFormsApp1
             //conn.Close();
         }
 
+        private string Select_data(string Ket_Luan)
+        {
+            string Ten_Ket_Luan = "select Ten_Ket_Luan from Ket_Luan where Ma_Ket_Luan='" + Ket_Luan + "'";
+            DataTable Table_TenKetLuan = connect.ExecuteDataTable_SQL(Ten_Ket_Luan);
+            DataRow row_TenKetLuan = Table_TenKetLuan.Rows[0];
+            string rowValue_TenKetLuan = row_TenKetLuan["Ten_Ket_Luan"].ToString();
+            return rowValue_TenKetLuan;
+        }
         private int KiemTraTonTai(string[] a, string[] b)
         {
             int len1 = a.Length;
             int len2 = b.Length;
             int dem_giong = 0;
-            int dem_khac = 0;
             for (int i=0;i<len1;i++)
             {
                 for(int j=0;j<len2;j++)
@@ -106,35 +135,38 @@ namespace WindowsFormsApp1
                         dem_giong++;
                         break;
                     }
-                    else
-                    {
-                        dem_khac++;
-                    }
+                    
                 }
             }
-            return dem/len2;
-            if (dem==len2)
+            if (dem_giong / len2 == 1 && dem_giong / len1 == 1)
             {
-                MessageBox.Show("Chắc chắn bị "+KetLuan);
+                return 1;
             }
             else
             {
-                if(dem/len1 >0.5)
-                {
-                    MessageBox.Show("Nghi ngờ bị " + KetLuan);
-                }
+                double c =  Convert.ToDouble(dem_giong)/ Convert.ToDouble(len1);
+                if (c > 0.5 && dem_giong / len2 == 1)
+                    return 2;
+                else
+                    return -1;
             }
+               
         }
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            dataGridView2.DefaultCellStyle.SelectionBackColor = Color.White;
+            dataGridView2.DefaultCellStyle.SelectionForeColor = Color.Black;
             int idx = e.RowIndex;
+          
             if (idx >= 0 && idx < dataGridView2.RowCount - 1)
             {
                 //string a = dataGridView1.Rows[idx].Cells["MaTrieuChung"].Value.ToString();
                 //MessageBox.Show(a);
                 string a = dataGridView2.Rows[idx].Cells["Checkbox1"].Value.ToString();
                 string b = dataGridView2.Rows[idx].Cells["MaTC"].Value.ToString();
+              
+
                 //Cac_trieu_chung += 
                 string sql = "Update Trieu_chung ";
                 if (a == "true")
@@ -151,6 +183,9 @@ namespace WindowsFormsApp1
                 connect.ExecuteNonData(sql);
 
             }
+            string sql1 = "select * from Trieu_chung";
+            DataTable table = connect.ExecuteDataTable_SQL(sql1);
+            dataGridView2.DataSource = table;
         }
     }
 }
