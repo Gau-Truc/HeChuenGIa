@@ -21,8 +21,6 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //dataGridView2.DefaultCellStyle.SelectionBackColor = Color.White;
-            //dataGridView2.DefaultCellStyle.SelectionForeColor = Color.Black;
             string sql1 = "update Trieu_chung set Checkbox='false'";
             connect.ExecuteNonData(sql1);
             string sql = "select * from Trieu_chung";
@@ -37,6 +35,7 @@ namespace WindowsFormsApp1
 
         private void TuVan_Click(object sender, EventArgs e)
         {
+            KetQua.Text = "";
             string sql = "select Ma_Trieu_Chung from Trieu_Chung where Checkbox='true'";
             DataTable table = connect.ExecuteDataTable_SQL(sql);
             string[] mang = new string[table.Rows.Count];
@@ -49,7 +48,6 @@ namespace WindowsFormsApp1
             }
             string select_luat = "select * from Luat";
             DataTable table_luat = connect.ExecuteDataTable_SQL(select_luat);
-            string KL_phu = "";
             string[] arrKiemTraTonTai = new string[table_luat.Rows.Count];
             //string[] mang_luat = new string[table_luat.Rows.Count];
             for (int i = 0; i < table_luat.Rows.Count; i++)
@@ -58,61 +56,65 @@ namespace WindowsFormsApp1
                 string rowValue = row["Cac_Trieu_Chung"].ToString();
                 string[] mang_luat = rowValue.Split(',');
                 Array.Sort(mang_luat);
-                string KiemTra = KiemTraTonTai(mang_luat, mang);
-                arrKiemTraTonTai[i] = KiemTra;
+                string KiemTra = KiemTraTonTai(mang,mang_luat);
+                string Ket_Luan = row["Ket_Luan"].ToString();
+                string rowValue_TenKetLuan = Select_data(Ket_Luan);
+                if (KiemTra=="true")
+                {
+                   
+                    KetQua.Text = rowValue_TenKetLuan;
+                    GiaiThich.Text = rowValue + "\n==>\n" + Ket_Luan;
+                    break;
+                }
+                else
+                {
+                    arrKiemTraTonTai[i] = KiemTra +"."+ rowValue+"."+ Ket_Luan+ "." + rowValue_TenKetLuan;
+
+                }
             }
-            MessageBox.Show(arrKiemTraTonTai.Min().ToString());
-            
-            //if (arrKiemTraTonTai[0][0].ToString() == 1)
-            //{
-            //    int Tam = KiemTra;
-            //}
-            //if (KiemTra == 1)
-            //{
-            //    string Ket_Luan = row["Ket_Luan"].ToString();
-            //    string rowValue_TenKetLuan = Select_data(Ket_Luan);
-            //    textBox1.Text = rowValue_TenKetLuan;
-            //    break;
-            //}
-            //else if (KiemTra == 2)
-            //{
-            //    string Ket_Luan = row["Ket_Luan"].ToString();
-            //    string rowValue_TenKetLuan = Select_data(Ket_Luan);
-            //    textBox1.Text = "Nghi ngờ bị " + rowValue_TenKetLuan;
-            //    break;
-            //}
-            //else
-            //{
+            //MessageBox.Show(arrKiemTraTonTai.Min().ToString());
+            int min = 10000;
+            if (arrKiemTraTonTai != null && KetQua.Text=="")
+            {
+                foreach (string i in arrKiemTraTonTai)
+                {
+                    string[] Kiem_Tra_CT = i.Split('.');
+                    if (Kiem_Tra_CT[0].Trim() == "KN")
+                    {
+                        KetQua.Text = "Nghi ngờ bị " + Kiem_Tra_CT[3];
+                        GiaiThich.Text = Kiem_Tra_CT[1] + "\n==>\n" + Kiem_Tra_CT[2];
+                        break;
+                    }
+                    if (Kiem_Tra_CT[0].Trim() == "KNCONGTC")
+                    {
+                        if (Convert.ToInt32(Kiem_Tra_CT[Kiem_Tra_CT.Length - 4]) <= min)
+                        {
+                            string Ten_Trieu_Chung = "";
+                            min = Convert.ToInt32(Kiem_Tra_CT[Kiem_Tra_CT.Length - 4]);
+                            int bd = 1;
+                            int kt= 1+min;
+                            Ten_Trieu_Chung = Select_Ten_Trieu_Chung(Kiem_Tra_CT[bd].ToString());
+                            for (int z =bd+1; z<kt;z++)
+                                Ten_Trieu_Chung= Ten_Trieu_Chung+","+ Select_Ten_Trieu_Chung(Kiem_Tra_CT[z].ToString());
+                            KetQua.Text = "Nghi ngờ bị " + Kiem_Tra_CT[Kiem_Tra_CT.Length - 1] + "--" + Ten_Trieu_Chung;
+                            GiaiThich.Text = Kiem_Tra_CT[Kiem_Tra_CT.Length - 3] + "\n==>\n" + Kiem_Tra_CT[Kiem_Tra_CT.Length - 2];
+                        }
+                        
+                    }
 
-            //    textBox1.Text = "false";
-            //}
+                }
+            }
 
-            //mang_luat[i] = rowValue;
-            //MessageBox.Show(mang_luat[i]);
+    
 
-
-            //SqlConnection conn = new SqlConnection("Data Source=LAPTOP-MAVHB4L2\\SQLEXPRESS;Initial Catalog=ChuanDoanBenhPhoi;user id=sa;password=29102001lun");
-            //conn.Open();
-            //string sql = "select Ma_Trieu_Chung from Trieu_Chung where Checkbox='true'";
-            //SqlCommand cmd = new SqlCommand(sql, conn);
-            //var reader = cmd.ExecuteReader();
-            //if (reader.HasRows)
-            //{
-            //    // Đọc từng dòng tập kết quả
-            //    while (reader.Read())
-            //    {
-
-            //        var tendanhmuc = reader["Ma_Trieu_Chung"];
-
-            //        Console.WriteLine(tendanhmuc);
-            //    }
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Không có dữ liệu trả về");
-            //}
-
-            //conn.Close();
+        }
+        private string Select_Ten_Trieu_Chung(string TrieuChung)
+        {
+            string Ten_Ket_Luan = "select Ten_Trieu_Chung from Trieu_chung where Ma_Trieu_Chung='" + TrieuChung + "'";
+            DataTable Table_TenKetLuan = connect.ExecuteDataTable_SQL(Ten_Ket_Luan);
+            DataRow row_TenKetLuan = Table_TenKetLuan.Rows[0];
+            string rowValue_TenKetLuan = row_TenKetLuan["Ten_Trieu_Chung"].ToString();
+            return rowValue_TenKetLuan;
         }
 
         private string Select_data(string Ket_Luan)
@@ -123,10 +125,10 @@ namespace WindowsFormsApp1
             string rowValue_TenKetLuan = row_TenKetLuan["Ten_Ket_Luan"].ToString();
             return rowValue_TenKetLuan;
         }
-        private string KiemTraTonTai(string[] a, string[] b)
+        private string KiemTraTonTai(string[] Trieu_Chung_Chon, string[] Tap_luat)
         {
-            //int len1 = a;//len luật sql
-            //int len2 = b;// len triệu chứng chọn
+            int len_trieu_chung_chon = Trieu_Chung_Chon.Length;//len luật sql
+            int len_tap_luat = Tap_luat.Length;// len triệu chứng chọn
             int dem_giong = 0;
             string str = "";
             //for (int i=0;i<len1;i++)
@@ -141,20 +143,89 @@ namespace WindowsFormsApp1
                     
             //    }
             //}
-           if  (a.SequenceEqual(b)==true)
+            if  (Trieu_Chung_Chon.SequenceEqual(Tap_luat)==true)
             {
-                str = "true";
+                str= "true";
             }
-            //if (dem_giong / len2 == 1 && dem_giong / len1 == 1)
-            //{
-            //    str += '1';
-            //}
-            //double c =  Convert.ToDouble(dem_giong)/ Convert.ToDouble(len1);
-            //if (c > 0.5 && dem_giong / len2 == 1)
-            //    str += '2';
-            
+            else
+            {
+                for (int i = 0; i < len_trieu_chung_chon; i++)
+                {
+                    for (int j = 0; j < len_tap_luat; j++)
+                    {
+                        if (string.Compare(Trieu_Chung_Chon[i], Tap_luat[j]) == 0)
+                        {
+                            dem_giong++;
+                            break;
+                        }
+
+                    }
+                }
+                double c = Convert.ToDouble(dem_giong) / Convert.ToDouble(len_tap_luat);
+                double d = Convert.ToDouble(dem_giong) / Convert.ToDouble(len_trieu_chung_chon);
+                if (c > 0.5 && dem_giong / len_trieu_chung_chon == 1)
+                    str= "KN";
+                else
+                    if(c == 1 && len_trieu_chung_chon>len_tap_luat)
+                {
+                    str = "KNCONGTC";
+                    //So_Sanh_Hai_Mang(Trieu_Chung_Chon, Tap_luat, len_trieu_chung_chon, len_tap_luat);
+                    string TonTai = "";
+                    string[] arr_Khac = new string[len_trieu_chung_chon];
+                    int dem_phan_tu_mang = 0;
+                    for (int i = 0; i < len_trieu_chung_chon; i++)
+                    {
+                        TonTai = "";
+                        for (int j = 0; j < len_tap_luat; j++)
+                        {
+                            if (string.Compare(Trieu_Chung_Chon[i], Tap_luat[j]) == 0)
+                            {
+                                TonTai = "True";
+                                break;
+                            }
+
+                        }
+                        if (TonTai != "True")
+                        {
+                            arr_Khac[dem_phan_tu_mang] = Trieu_Chung_Chon[i];
+                            str = str + "." + Trieu_Chung_Chon[i];
+                            dem_phan_tu_mang++;
+                        }
+                    }
+                    str = str + "." + dem_phan_tu_mang;
+
+                }
+            }
+
             return str;
         }
+
+        //private string[] So_Sanh_Hai_Mang(string[] Trieu_Chung_Chon, string[] Tap_luat,int len_trieu_chung_chon,int len_tap_luat)
+        //{
+        //    string TonTai = "";
+        //    string[] arr_Khac = new string[len_trieu_chung_chon];
+        //    int dem_phan_tu_mang = 0;
+        //    for (int i = 0; i < len_trieu_chung_chon; i++)
+        //    {
+        //        for (int j = 0; j < len_tap_luat; j++)
+        //        {
+        //            if (string.Compare(Trieu_Chung_Chon[i], Tap_luat[j]) == 0)
+        //            {
+        //                TonTai = "True";
+        //                break;
+        //            }
+
+        //        }
+        //        if(TonTai == "True")
+        //        {
+        //            arr_Khac[dem_phan_tu_mang] = Trieu_Chung_Chon[i];
+        //            dem_phan_tu_mang++;
+        //            TonTai = "False";
+        //            break;
+        //        }
+        //        return arr_Khac;
+        //    }
+        //}
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -168,16 +239,11 @@ namespace WindowsFormsApp1
 
             if (idx >= 0 && idx < dataGridView2.RowCount - 1)
             {
-                //string a = dataGridView1.Rows[idx].Cells["MaTrieuChung"].Value.ToString();
                 idx = idx + 1;
                 string sql1 = "select * from Trieu_chung where Ma_Trieu_Chung='" + idx + "'";
                 DataTable table = connect.ExecuteDataTable_SQL(sql1);
-                //MessageBox.Show(idx.ToString());
                 DataRow row_TenKetLuan = table.Rows[0];
-                string a = row_TenKetLuan["Checkbox"].ToString();
-
-
-                //Cac_trieu_chung += 
+                string a = row_TenKetLuan["Checkbox"].ToString().Trim();
                 string sql = "Update Trieu_chung ";
                 if (a == "true")
                 {
@@ -189,10 +255,14 @@ namespace WindowsFormsApp1
                 }
                 sql += " where Ma_Trieu_Chung = " + "\'" + idx + "\'";
 
-
                 connect.ExecuteNonData(sql);
 
             }
+        }
+
+        private void GiaiThich_TextChanged(object sender, EventArgs e)
+        {
+            //string sql1 = "select * from Trieu_chung where Ma_Trieu_Chung='" + idx + "'";
         }
     }
 }

@@ -8,3 +8,14 @@ D:\HeChuyenGia\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.cspr
 D:\HeChuyenGia\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
 D:\HeChuyenGia\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 D:\HeChuyenGia\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+E:\HeChuyenGia\CuoiMon\C#\HeChuenGIa\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+E:\HeChuyenGia\CuoiMon\C#\HeChuenGIa\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+E:\HeChuyenGia\CuoiMon\C#\HeChuenGIa\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+E:\HeChuyenGia\CuoiMon\C#\HeChuenGIa\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
+E:\HeChuyenGia\CuoiMon\C#\HeChuenGIa\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.SuggestedBindingRedirects.cache
+E:\HeChuyenGia\CuoiMon\C#\HeChuenGIa\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Trangchu.resources
+E:\HeChuyenGia\CuoiMon\C#\HeChuenGIa\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+E:\HeChuyenGia\CuoiMon\C#\HeChuenGIa\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+E:\HeChuyenGia\CuoiMon\C#\HeChuenGIa\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+E:\HeChuyenGia\CuoiMon\C#\HeChuenGIa\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+E:\HeChuyenGia\CuoiMon\C#\HeChuenGIa\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb

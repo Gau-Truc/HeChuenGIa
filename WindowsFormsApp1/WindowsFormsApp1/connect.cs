@@ -10,7 +10,7 @@ namespace WindowsFormsApp1
 {
     class connect
     {
-        public static String ConnectString = "Data Source=LAPTOP-MAVHB4L2\\SQLEXPRESS;Initial Catalog=ChuanDoanBenhPhoi;user id=sa;password=29102001lun";
+        public static String ConnectString = "Data Source=LAPTOP-LR8DI31P;Initial Catalog=ChuanDoanBenhPhoi;Integrated Security=True";
 
         public static DataTable ExecuteDataTable_SQL(string sql)
         {

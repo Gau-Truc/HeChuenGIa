@@ -39,12 +39,13 @@ namespace WindowsFormsApp1
             this.kếtLuậnToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.luậtToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.TuVan = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.KetQua = new System.Windows.Forms.TextBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.MaTC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenTC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Checkbox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.GiaiThich = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -119,7 +120,7 @@ namespace WindowsFormsApp1
             // 
             // TuVan
             // 
-            this.TuVan.Location = new System.Drawing.Point(769, 40);
+            this.TuVan.Location = new System.Drawing.Point(12, 301);
             this.TuVan.Name = "TuVan";
             this.TuVan.Size = new System.Drawing.Size(167, 41);
             this.TuVan.TabIndex = 3;
@@ -127,37 +128,29 @@ namespace WindowsFormsApp1
             this.TuVan.UseVisualStyleBackColor = true;
             this.TuVan.Click += new System.EventHandler(this.TuVan_Click);
             // 
-            // listBox1
+            // KetQua
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 26;
-            this.listBox1.Location = new System.Drawing.Point(599, 144);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(616, 82);
-            this.listBox1.TabIndex = 4;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(599, 269);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(616, 34);
-            this.textBox1.TabIndex = 6;
+            this.KetQua.Enabled = false;
+            this.KetQua.Location = new System.Drawing.Point(12, 348);
+            this.KetQua.Name = "KetQua";
+            this.KetQua.Size = new System.Drawing.Size(1283, 34);
+            this.KetQua.TabIndex = 6;
             // 
             // dataGridView2
             // 
+            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MaTC,
             this.TenTC,
             this.Checkbox});
-            this.dataGridView2.Location = new System.Drawing.Point(12, 76);
+            this.dataGridView2.Location = new System.Drawing.Point(12, 31);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.RowTemplate.Height = 24;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(559, 443);
+            this.dataGridView2.Size = new System.Drawing.Size(1283, 264);
             this.dataGridView2.TabIndex = 7;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             // 
@@ -175,24 +168,43 @@ namespace WindowsFormsApp1
             this.TenTC.HeaderText = "Tên triệu chứng";
             this.TenTC.MinimumWidth = 6;
             this.TenTC.Name = "TenTC";
-            this.TenTC.Width = 125;
+            this.TenTC.Width = 800;
             // 
             // Checkbox
             // 
             this.Checkbox.DataPropertyName = "Checkbox";
-            this.Checkbox.HeaderText = "Checkbox";
+            this.Checkbox.HeaderText = "";
             this.Checkbox.MinimumWidth = 6;
             this.Checkbox.Name = "Checkbox";
-            this.Checkbox.Width = 125;
+            this.Checkbox.Width = 20;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 385);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(108, 26);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Giải thích:";
+            // 
+            // GiaiThich
+            // 
+            this.GiaiThich.Location = new System.Drawing.Point(12, 414);
+            this.GiaiThich.Multiline = true;
+            this.GiaiThich.Name = "GiaiThich";
+            this.GiaiThich.Size = new System.Drawing.Size(626, 254);
+            this.GiaiThich.TabIndex = 9;
+            this.GiaiThich.TextChanged += new System.EventHandler(this.GiaiThich_TextChanged);
             // 
             // Trangchu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1307, 680);
+            this.Controls.Add(this.GiaiThich);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.KetQua);
             this.Controls.Add(this.TuVan);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -220,12 +232,13 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.ToolStripMenuItem kếtLuậnToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem luậtToolStripMenuItem1;
         private System.Windows.Forms.Button TuVan;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox KetQua;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaTC;
         private System.Windows.Forms.DataGridViewTextBoxColumn TenTC;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Checkbox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox GiaiThich;
     }
 }
 
