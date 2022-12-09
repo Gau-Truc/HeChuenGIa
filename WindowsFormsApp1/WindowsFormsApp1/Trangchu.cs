@@ -21,18 +21,13 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            dataGridView2.DefaultCellStyle.SelectionBackColor = Color.White;
-            dataGridView2.DefaultCellStyle.SelectionForeColor = Color.Black;
+            //dataGridView2.DefaultCellStyle.SelectionBackColor = Color.White;
+            //dataGridView2.DefaultCellStyle.SelectionForeColor = Color.Black;
             string sql1 = "update Trieu_chung set Checkbox='false'";
             connect.ExecuteNonData(sql1);
             string sql = "select * from Trieu_chung";
             DataTable table= connect.ExecuteDataTable_SQL(sql);
             dataGridView2.DataSource = table;
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -55,6 +50,7 @@ namespace WindowsFormsApp1
             string select_luat = "select * from Luat";
             DataTable table_luat = connect.ExecuteDataTable_SQL(select_luat);
             string KL_phu = "";
+            string[] arrKiemTraTonTai = new string[table_luat.Rows.Count];
             //string[] mang_luat = new string[table_luat.Rows.Count];
             for (int i = 0; i < table_luat.Rows.Count; i++)
             {
@@ -62,31 +58,37 @@ namespace WindowsFormsApp1
                 string rowValue = row["Cac_Trieu_Chung"].ToString();
                 string[] mang_luat = rowValue.Split(',');
                 Array.Sort(mang_luat);
-                int KiemTra = KiemTraTonTai(mang_luat, mang);
-                if (KiemTra == 1)
-                {
-                    string Ket_Luan = row["Ket_Luan"].ToString();
-                    string rowValue_TenKetLuan = Select_data(Ket_Luan);
-                    textBox1.Text = rowValue_TenKetLuan;
-                    break;
-                }
-                else if (KiemTra == 2)
-                {
-                    string Ket_Luan = row["Ket_Luan"].ToString();
-                    string rowValue_TenKetLuan = Select_data(Ket_Luan);
-                    textBox1.Text = "Nghi ngờ bị " + rowValue_TenKetLuan;
-                    break;
-                }
-                else
-                {
-                 
-                    textBox1.Text = "false";
-                }
-               
-                //mang_luat[i] = rowValue;
-                //MessageBox.Show(mang_luat[i]);
+                string KiemTra = KiemTraTonTai(mang_luat, mang);
+                arrKiemTraTonTai[i] = KiemTra;
             }
+            MessageBox.Show(arrKiemTraTonTai.Min().ToString());
+            
+            //if (arrKiemTraTonTai[0][0].ToString() == 1)
+            //{
+            //    int Tam = KiemTra;
+            //}
+            //if (KiemTra == 1)
+            //{
+            //    string Ket_Luan = row["Ket_Luan"].ToString();
+            //    string rowValue_TenKetLuan = Select_data(Ket_Luan);
+            //    textBox1.Text = rowValue_TenKetLuan;
+            //    break;
+            //}
+            //else if (KiemTra == 2)
+            //{
+            //    string Ket_Luan = row["Ket_Luan"].ToString();
+            //    string rowValue_TenKetLuan = Select_data(Ket_Luan);
+            //    textBox1.Text = "Nghi ngờ bị " + rowValue_TenKetLuan;
+            //    break;
+            //}
+            //else
+            //{
 
+            //    textBox1.Text = "false";
+            //}
+
+            //mang_luat[i] = rowValue;
+            //MessageBox.Show(mang_luat[i]);
 
 
             //SqlConnection conn = new SqlConnection("Data Source=LAPTOP-MAVHB4L2\\SQLEXPRESS;Initial Catalog=ChuanDoanBenhPhoi;user id=sa;password=29102001lun");
@@ -121,51 +123,59 @@ namespace WindowsFormsApp1
             string rowValue_TenKetLuan = row_TenKetLuan["Ten_Ket_Luan"].ToString();
             return rowValue_TenKetLuan;
         }
-        private int KiemTraTonTai(string[] a, string[] b)
+        private string KiemTraTonTai(string[] a, string[] b)
         {
-            int len1 = a.Length;
-            int len2 = b.Length;
+            //int len1 = a;//len luật sql
+            //int len2 = b;// len triệu chứng chọn
             int dem_giong = 0;
-            for (int i=0;i<len1;i++)
-            {
-                for(int j=0;j<len2;j++)
-                {
-                    if(string.Compare(a[i],b[j])==0)
-                    {
-                        dem_giong++;
-                        break;
-                    }
+            string str = "";
+            //for (int i=0;i<len1;i++)
+            //{
+            //    for(int j=0;j<len2;j++)
+            //    {
+            //        if(string.Compare(a[i],b[j])==0)
+            //        {
+            //            dem_giong++;
+            //            break;
+            //        }
                     
-                }
-            }
-            if (dem_giong / len2 == 1 && dem_giong / len1 == 1)
+            //    }
+            //}
+           if  (a.SequenceEqual(b)==true)
             {
-                return 1;
+                str = "true";
             }
-            else
-            {
-                double c =  Convert.ToDouble(dem_giong)/ Convert.ToDouble(len1);
-                if (c > 0.5 && dem_giong / len2 == 1)
-                    return 2;
-                else
-                    return -1;
-            }
-               
+            //if (dem_giong / len2 == 1 && dem_giong / len1 == 1)
+            //{
+            //    str += '1';
+            //}
+            //double c =  Convert.ToDouble(dem_giong)/ Convert.ToDouble(len1);
+            //if (c > 0.5 && dem_giong / len2 == 1)
+            //    str += '2';
+            
+            return str;
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+            
         }
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridView2.DefaultCellStyle.SelectionBackColor = Color.White;
-            dataGridView2.DefaultCellStyle.SelectionForeColor = Color.Black;
             int idx = e.RowIndex;
-          
+
             if (idx >= 0 && idx < dataGridView2.RowCount - 1)
             {
                 //string a = dataGridView1.Rows[idx].Cells["MaTrieuChung"].Value.ToString();
-                //MessageBox.Show(a);
-                string a = dataGridView2.Rows[idx].Cells["Checkbox1"].Value.ToString();
-                string b = dataGridView2.Rows[idx].Cells["MaTC"].Value.ToString();
-              
+                idx = idx + 1;
+                string sql1 = "select * from Trieu_chung where Ma_Trieu_Chung='" + idx + "'";
+                DataTable table = connect.ExecuteDataTable_SQL(sql1);
+                //MessageBox.Show(idx.ToString());
+                DataRow row_TenKetLuan = table.Rows[0];
+                string a = row_TenKetLuan["Checkbox"].ToString();
+
 
                 //Cac_trieu_chung += 
                 string sql = "Update Trieu_chung ";
@@ -177,15 +187,12 @@ namespace WindowsFormsApp1
                 {
                     sql += "set Checkbox=\'true\' ";
                 }
-                sql += " where Ma_Trieu_Chung = " + "\'" + b + "\'";
+                sql += " where Ma_Trieu_Chung = " + "\'" + idx + "\'";
 
 
                 connect.ExecuteNonData(sql);
 
             }
-            string sql1 = "select * from Trieu_chung";
-            DataTable table = connect.ExecuteDataTable_SQL(sql1);
-            dataGridView2.DataSource = table;
         }
     }
 }

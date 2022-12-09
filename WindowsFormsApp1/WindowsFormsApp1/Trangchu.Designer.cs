@@ -40,10 +40,11 @@ namespace WindowsFormsApp1
             this.luậtToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.TuVan = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.MaTC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenTC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Checkbox1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Checkbox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -73,19 +74,19 @@ namespace WindowsFormsApp1
             // đăngNhậpToolStripMenuItem
             // 
             this.đăngNhậpToolStripMenuItem.Name = "đăngNhậpToolStripMenuItem";
-            this.đăngNhậpToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.đăngNhậpToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.đăngNhậpToolStripMenuItem.Text = "Đổi mật khẩu";
             // 
             // đăngXuấtToolStripMenuItem
             // 
             this.đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             // 
             // thoátToolStripMenuItem
             // 
             this.thoátToolStripMenuItem.Name = "thoátToolStripMenuItem";
-            this.thoátToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.thoátToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.thoátToolStripMenuItem.Text = "Thoát";
             // 
             // kếtLuậnToolStripMenuItem
@@ -101,19 +102,19 @@ namespace WindowsFormsApp1
             // triệuChứngToolStripMenuItem1
             // 
             this.triệuChứngToolStripMenuItem1.Name = "triệuChứngToolStripMenuItem1";
-            this.triệuChứngToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.triệuChứngToolStripMenuItem1.Size = new System.Drawing.Size(169, 26);
             this.triệuChứngToolStripMenuItem1.Text = "Triệu chứng";
             // 
             // kếtLuậnToolStripMenuItem1
             // 
             this.kếtLuậnToolStripMenuItem1.Name = "kếtLuậnToolStripMenuItem1";
-            this.kếtLuậnToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.kếtLuậnToolStripMenuItem1.Size = new System.Drawing.Size(169, 26);
             this.kếtLuậnToolStripMenuItem1.Text = "Kết luận";
             // 
             // luậtToolStripMenuItem1
             // 
             this.luậtToolStripMenuItem1.Name = "luậtToolStripMenuItem1";
-            this.luậtToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.luậtToolStripMenuItem1.Size = new System.Drawing.Size(169, 26);
             this.luậtToolStripMenuItem1.Text = "Luật";
             // 
             // TuVan
@@ -136,47 +137,53 @@ namespace WindowsFormsApp1
             this.listBox1.TabIndex = 4;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(599, 269);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(616, 34);
+            this.textBox1.TabIndex = 6;
+            // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MaTC,
             this.TenTC,
-            this.Checkbox1});
-            this.dataGridView2.Location = new System.Drawing.Point(12, 58);
+            this.Checkbox});
+            this.dataGridView2.Location = new System.Drawing.Point(12, 76);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.RowTemplate.Height = 24;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(565, 405);
-            this.dataGridView2.TabIndex = 5;
+            this.dataGridView2.Size = new System.Drawing.Size(559, 443);
+            this.dataGridView2.TabIndex = 7;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             // 
             // MaTC
             // 
             this.MaTC.DataPropertyName = "Ma_Trieu_Chung";
-            this.MaTC.HeaderText = "Mã TC";
+            this.MaTC.HeaderText = "Mã triệu chứng";
             this.MaTC.MinimumWidth = 6;
             this.MaTC.Name = "MaTC";
-            this.MaTC.Width = 60;
+            this.MaTC.Width = 125;
             // 
             // TenTC
             // 
             this.TenTC.DataPropertyName = "Ten_Trieu_Chung";
-            this.TenTC.HeaderText = "Tên TC";
+            this.TenTC.HeaderText = "Tên triệu chứng";
             this.TenTC.MinimumWidth = 6;
             this.TenTC.Name = "TenTC";
             this.TenTC.Width = 125;
             // 
-            // Checkbox1
+            // Checkbox
             // 
-            this.Checkbox1.DataPropertyName = "Checkbox";
-            this.Checkbox1.HeaderText = "Checkbox1";
-            this.Checkbox1.MinimumWidth = 6;
-            this.Checkbox1.Name = "Checkbox1";
-            this.Checkbox1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Checkbox1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Checkbox1.Width = 125;
+            this.Checkbox.DataPropertyName = "Checkbox";
+            this.Checkbox.HeaderText = "Checkbox";
+            this.Checkbox.MinimumWidth = 6;
+            this.Checkbox.Name = "Checkbox";
+            this.Checkbox.Width = 125;
             // 
             // Trangchu
             // 
@@ -184,6 +191,7 @@ namespace WindowsFormsApp1
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1307, 680);
             this.Controls.Add(this.dataGridView2);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.TuVan);
             this.Controls.Add(this.menuStrip1);
@@ -213,10 +221,11 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.ToolStripMenuItem luậtToolStripMenuItem1;
         private System.Windows.Forms.Button TuVan;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaTC;
         private System.Windows.Forms.DataGridViewTextBoxColumn TenTC;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Checkbox1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Checkbox;
     }
 }
 
